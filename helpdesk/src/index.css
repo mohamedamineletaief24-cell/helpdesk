@@ -1,0 +1,318 @@
+:root {
+  --ink: #1b2a2f;
+  --ink-soft: #55656a;
+  --teal: #0f766e;
+  --teal-dark: #0b5a54;
+  --chalk: #f4f6f5;
+  --line: #d3dbd8;
+  --alert: #b42318;
+  --alert-bg: #fdecea;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--chalk);
+  line-height: 1.5;
+}
+
+h1, h2 { line-height: 1.2; margin: 0 0 0.5rem; }
+.muted { color: var(--ink-soft); margin: 0; }
+
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+/* ---------- buttons ---------- */
+.btn-primary, .btn-secondary {
+  border-radius: 6px;
+  padding: 0.65rem 1.1rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--teal); color: #fff; font-weight: 600; }
+.btn-primary:hover:not(:disabled) { background: var(--teal-dark); }
+.btn-primary:disabled { opacity: 0.6; cursor: wait; }
+.btn-secondary { background: #fff; color: var(--ink); border-color: var(--line); }
+.btn-secondary:hover { border-color: var(--ink-soft); }
+
+/* ---------- login ---------- */
+.login-layout { min-height: 100vh; display: grid; grid-template-columns: 5fr 6fr; }
+
+.login-side {
+  background: var(--ink);
+  color: #e8efed;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-side h2 { font-size: 2rem; max-width: 14ch; }
+.login-side p { color: #a9bab5; max-width: 32ch; }
+
+/* The four ticket statuses, drawn as the line a ticket follows */
+.lifecycle { list-style: none; margin: 2.5rem 0 0; padding: 0 0 0 1.5rem; border-left: 2px solid #3b4f55; }
+.lifecycle li { position: relative; padding: 0.55rem 0; }
+.lifecycle li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.5rem - 6px);
+  top: 50%;
+  width: 10px; height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 3px var(--ink);
+}
+
+.login-main { display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-form { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 0.4rem; }
+.login-form h1 { font-size: 1.6rem; margin-bottom: 1rem; }
+.login-form label { font-weight: 600; margin-top: 0.6rem; }
+.login-form input {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+.login-form .btn-primary { margin-top: 1.2rem; }
+.error {
+  margin: 0.8rem 0 0;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  color: var(--alert);
+  background: var(--alert-bg);
+}
+
+/* ---------- role pages ---------- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.topbar h1 { font-size: 1.3rem; margin: 0; }
+.page { padding: 2rem; max-width: 960px; }
+
+@media (max-width: 760px) {
+  .login-layout { grid-template-columns: 1fr; }
+  .login-side { padding: 2rem 1.5rem; }
+  .lifecycle { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- ticket form (6.2) ---------- */
+textarea, select { font: inherit; }
+
+.ticket-form {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.ticket-form h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.ticket-form label { font-weight: 600; margin-top: 0.6rem; }
+.ticket-form input,
+.ticket-form textarea,
+.ticket-form select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+.ticket-form textarea { resize: vertical; }
+.ticket-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.ticket-form .btn-primary { margin-top: 1.2rem; align-self: flex-start; }
+.success {
+  margin: 0.8rem 0 0;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  color: #0b5a54;
+  background: #e3f4f1;
+}
+
+/* ---------- my tickets list (6.3) ---------- */
+.ticket-section { margin-top: 2.5rem; }
+.ticket-section h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+
+.ticket-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+
+.ticket-card {
+  padding: 1.1rem 1.25rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.ticket-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.ticket-card h3 { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+.ticket-desc { margin: 0.5rem 0 0.9rem; color: var(--ink-soft); white-space: pre-line; overflow-wrap: anywhere; }
+
+.ticket-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem 1rem; margin: 0; }
+.ticket-meta dt { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); }
+.ticket-meta dd { margin: 0; font-weight: 600; }
+.ticket-meta dd.muted { font-weight: 400; }
+.capitalize { text-transform: capitalize; }
+
+.badge {
+  flex-shrink: 0;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.status-open { background: #e6eef8; color: #1d4b80; }
+.status-progress { background: #fdf0d5; color: #8a5a00; }
+.status-resolved { background: #e3f4f1; color: #0b5a54; }
+.status-closed { background: #e9ecec; color: #55656a; }
+
+/* ---------- technician page (6.4) ---------- */
+.workload {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 700;
+  background: #e3f4f1;
+  color: #0b5a54;
+}
+.workload.full { background: var(--alert-bg); color: var(--alert); }
+.ticket-actions { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+.page > .success, .page > .error { margin: 0 0 1rem; }
+
+/* ---------- accounts: register, requests, technician form (6.9 / 6.10 / 6.11) ---------- */
+.form-link { margin: 1rem 0 0; color: var(--ink-soft); }
+.form-link a { color: var(--teal-dark); font-weight: 600; }
+
+.btn-link { display: inline-block; text-decoration: none; text-align: center; margin-top: 1rem; }
+.btn-secondary.danger { color: var(--alert); }
+.btn-secondary.danger:hover:not(:disabled) { border-color: var(--alert); }
+.btn-secondary:disabled { opacity: 0.6; cursor: wait; }
+
+.requests .ticket-list { max-width: 720px; }
+.request-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.request-row p { margin: 0.15rem 0 0; }
+.request-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+@media (max-width: 760px) {
+  .request-row { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- comment and resolve (6.5) ---------- */
+.ticket-comments { margin-top: 1rem; }
+.ticket-comments h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+.ticket-comment {
+  margin: 0 0 0.5rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--chalk);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 6px 6px 0;
+}
+.ticket-comment p { margin: 0; white-space: pre-line; overflow-wrap: anywhere; }
+.ticket-comment footer { margin-top: 0.3rem; font-size: 0.8rem; color: var(--ink-soft); }
+
+.resolve-form { display: flex; flex-direction: column; gap: 0.4rem; }
+.resolve-form label { font-weight: 600; }
+.resolve-form textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+  resize: vertical;
+}
+.resolve-buttons { display: flex; gap: 0.5rem; margin-top: 0.4rem; }
+.ticket-actions { display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+.ticket-actions .resolve-form { width: 100%; }
+
+/* ---------- close / reopen (6.6) ---------- */
+.owner-actions { width: 100%; }
+
+/* ---------- Kanban board and filters (6.7) ---------- */
+.page.wide { max-width: none; }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  padding: 0.9rem 1.1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.filters label { display: block; margin-bottom: 0.25rem; font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); }
+.filters select {
+  min-width: 150px;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+}
+
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(270px, 1fr));
+  gap: 1rem;
+  align-items: start;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+.kanban-column { background: #e8edec; border-radius: 8px; padding: 0.75rem; min-width: 0; }
+.kanban-column-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem; }
+.kanban-column-head h3 { margin: 0; font-size: 1rem; }
+.count-badge { background: #fff; color: var(--ink); }
+.kanban-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+.kanban-empty { padding: 0.8rem 0.25rem; }
+.kanban .ticket-card { padding: 0.9rem 1rem; }
+.kanban .ticket-meta { grid-template-columns: 1fr 1fr; }
+
+/* ---------- statistics and technician activity (6.8) ---------- */
+.section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.section-head h2 { margin: 0; }
+
+.stat-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+.stat-tile { display: flex; flex-direction: column; padding: 1rem 1.2rem; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.stat-value { font-size: 1.9rem; font-weight: 700; line-height: 1.1; color: var(--teal-dark); }
+.stat-label { margin-top: 0.25rem; color: var(--ink-soft); font-size: 0.85rem; }
+
+.charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+.chart-box { padding: 1rem 1.2rem; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.chart-box h3 { margin: 0 0 0.7rem; font-size: 1rem; }
+.chart-canvas { position: relative; height: 240px; }
+
+.table-scroll { overflow-x: auto; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.activity-table { width: 100%; border-collapse: collapse; }
+.activity-table th, .activity-table td { padding: 0.7rem 1rem; text-align: left; border-bottom: 1px solid var(--line); }
+.activity-table th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); }
+.activity-table tr:last-child td { border-bottom: 0; }
+.workload.small { margin: 0; padding: 0.15rem 0.7rem; font-size: 0.9rem; }
